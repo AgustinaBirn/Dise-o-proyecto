@@ -1,8 +1,9 @@
 import { Router } from "express";
 // import { ProductManager } from "../../product-manager/product-manager.js";
-import { uploader } from "../uploader.js";
-import productsModel from "../dao/models/products.model.js";
-import { ProductManager } from "../dao/manager.mdb.js";
+import { uploader } from "../services/uploader.js";
+import productsModel from "../models/products.model.js";
+// import { ProductManager } from "../dao/manager.mdb.js";
+import {ProductsManager} from '../controllers/products.manager.js';
 import config from "../config.js";
 
 const middlewer = (req, res, next) => {
@@ -11,7 +12,7 @@ const middlewer = (req, res, next) => {
 };
 const router = Router();
 
-const manager = new ProductManager("../dao/models/products.model.js");
+const manager = new ProductsManager();
 
 router.param("id", async (req, res, next, id) => {
   let searchId = await dictionaryService.findId(id);

@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { CartManager } from "../dao/cart.manager.mdb.js"; 
+import { CartsManager } from "../controllers/cart.manager.js"; 
 
 const router = Router();
 
-const manager = new CartManager("../dao/cart.manager.mdb.js");
+const manager = new CartsManager();
 
 router.get("/", async (req, res) => {
   const limit = +req.query.limit || 0;

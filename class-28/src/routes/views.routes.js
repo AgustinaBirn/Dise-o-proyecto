@@ -1,16 +1,16 @@
 import { Router } from "express";
-import messagesModel from "../dao/models/messages.model.js";
-import productsModel from "../dao/models/products.model.js";
-import { ProductManager } from "../dao/manager.mdb.js";
-import { CartManager } from "../dao/cart.manager.mdb.js";
-import cartsModel from "../dao/models/carts.model.js"
+import messagesModel from "../models/messages.model.js";
+import productsModel from "../models/products.model.js";
+import { ProductsManager } from "../controllers/products.manager.js";
+import { CartsManager } from "../controllers/cart.manager.js";
+import cartsModel from "../models/carts.model.js"
 
 
 import fs from "fs";
 
 const router = Router();
-const productManager = new ProductManager("../dao/models/products.model.js");
-const cartManager = new CartManager("../dao/cart.manager.mdb.js");
+const productManager = new ProductsManager();
+const cartManager = new CartsManager();
 
 router.get("/products", async (req, res) => {
   const limit = +req.query.limit || 10;
@@ -30,10 +30,6 @@ router.get("/products", async (req, res) => {
   const user = req.session.user? { firstName : req.session.user.firstName,
      lastName  : req.session.user.lastName, role: req.session.user.role} : "no existe usuario";
   
-  // if(req.session.user){
-  //   const firstName = req.session.user.firstName;
-  //   const lastName  = req.session.user.lastName;
-  // }
 
   // const products = await productManager.getProducts(limit, page, query, sort);
   console.log("PRODUCTS :", products.docs);
@@ -69,17 +65,6 @@ router.get("/realtimeproducts", async (req, res) => {
   res.render("realTimeProducts", { ...products,docs:products.docs.map(ed=>{return({title:ed.title,price:ed.price,thumbnail:ed.thumbnail,description:ed.description,id:ed._id+""})}) });;
 
 });
-// router.get("/realtimeproducts", async (req, res) => {
-//   const limit = +req.query.limit || 10;
-//   const page = +req.query.page || 1;
-//   const query = req.query.query;
-//   const sort = +req.query.sort || 1;
-
-//   const products = await productManager.getProducts(limit, page, query, sort);
-//   console.log(products);
-//   res.render("realTimeProducts", { data: products });
-// });
-
 
 router.get("/chat", async (req, res) => {
   const messagesDb = await messagesModel.find().lean();
@@ -100,9 +85,5 @@ router.get("/profile", (req, res) => {
   if(!req.session.user) return res.redirect("/pplogin");
   res.render("profile", {user: req.session.user});
 });
-
-// router.get("/logout", (req, res) => {
-//   res.render("logout")
-// })
 
 export default router;

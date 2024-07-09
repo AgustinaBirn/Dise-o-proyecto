@@ -1,26 +1,19 @@
-import cartsModel from "./models/carts.model.js";
-import usersModel from "./models/user.model.js";
-import productsModel from "./models/products.model.js"
-import { ProductManager } from "./manager.mdb.js";
+import cartsModel from "../models/carts.model.js";
+import usersModel from "../models/user.model.js";
+import productsModel from "../models/products.model.js"
+import { ProductsService } from "./products.dao.mdb.js";
+// import ProductsManager from "../controllers/products.manager.js";
 
 
-const manager = new ProductManager();
+const manager = new ProductsService();
 
-export class CartManager {
+export class CartsService {
   constructor() {
     this.carts = [cartsModel];
   }
 
   async getCarts(limit) {
 
-    // try{
-    //   return await cartsModel.find()
-    //   .populate({path:"_user_id", model: usersModel})
-    //   .populate({path: "products._id", model: productsModel})
-    //   .lean();
-    // }catch(err){
-    //   return err.message;
-    // }
     try {
 
         let data = await cartsModel.find().lean();

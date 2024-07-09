@@ -1,12 +1,11 @@
-import userModel from "./models/user.model.js";
+import userModel from "../models/user.model.js";
 // import { ProductManager } from "./manager.mdb.js";
 
 
 // const manager = new ProductManager();
 
-export class UserManager {
+export class UsersService {
   constructor() {
-    this.users = [userModel];
   }
 
   async getUsers() {
@@ -50,22 +49,6 @@ export class UserManager {
     }
   }
 
-
-//   async findUser(email) {
-
-//     try {
-//         // const userEmail = { email : email};
-//         // const cartsDb = await cartsModel.findOne(cartId).lean();
-//         const userDb = await userModel.findOne({email}).lean();
-//         console.log(userDb);
-//           return userDb;
-
-//         } catch (err) {
-//           console.log("No se encontró el usuario", err);
-//           return [];
-//         }
-//   }
-
   async addUser(user) {
 
     try {
@@ -76,25 +59,11 @@ export class UserManager {
     }
   }
 
-// async updateUser(uid, property) {
-//   const userId = { _id : uid};
-  
-//   const user = await this.getUserById(userId);
-
-//   try {
-
-//     const body = { $set: { "products.$.quantity": cart.products[0].quantity + quantity } };
-//     const options = {new: true};;
-//     const filter = { _id: uid, "user._id": uid };
-
-//     console.log(quantity);
-    
-//     const productInCart = cart.products.find(p => p._id.toString() === pid) ? await cartsModel.findOneAndUpdate(filter, body, options) 
-//     : console.log("No se encontró el producto");
-
-//     console.log(cart.products[0].quantity);
-//   } catch (err) {
-//     console.log("no se pudo modificar el producto del carrito", err);
-//   }
-// }
+  update = async (filter, update, options) => {
+    try {
+        return await usersModel.findOneAndUpdate(filter, update, options);
+    } catch (err) {
+        return err.message;
+    };
+};
 }

@@ -1,10 +1,10 @@
 import fs from "fs";
-import { ProductManager } from "../product-manager/product-manager.js";
+import { ProductsService } from "../src/services/products.dao.mdb";
 import { error } from "console";
 
 const route = "./carts.json";
 
-const manager = new ProductManager();
+const manager = new ProductsService();
 
 export class CartManager {
   constructor() {

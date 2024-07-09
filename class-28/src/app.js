@@ -13,11 +13,10 @@ import config from "./config.js";
 import productsRoutes from "./routes/products.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import viewsRoutes from "./routes/views.routes.js";
-import messagesModel from "./dao/models/messages.model.js"
+import messagesModel from "./models/messages.model.js"
 import cookieRouter from "./routes/cookies.routes.js"
 import authRouter from "./routes/auth.routes.js"
 import TestRouter from "./routes/test.routes.js";
-import toysRoutes from "./routes/toys.routes.js";
 import MongoSingleton from "./services/mongo.singleton.js";
 
 const app = express();
@@ -81,8 +80,6 @@ app.set("views", `${config.DIRNAME}/views`);
 app.set("view engine", "handlebars");
 
 app.use("/", viewsRoutes);
-
-app.use("/toys", toysRoutes);
 
 app.use("/api/products", productsRoutes);
 

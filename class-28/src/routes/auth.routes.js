@@ -2,15 +2,15 @@ import { Router } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 
-import { UserManager } from "../dao/user.manager.js";
-import { createHash, isValidPassword, verifyRequiredBody, createToken, verifyToken, passportCall } from "../utils.js";
+import { UsersManager } from "../controllers/users.manager.js";
+import { createHash, isValidPassword, verifyRequiredBody, createToken, verifyToken, passportCall } from "../services/utils.js";
 import initAuthStrategies from "../auth/passport.strategies.js";
 
 import config from "../config.js";
 
 const router = Router();
 
-const manager = new UserManager("../dao/models/user.model.js");
+const manager = new UsersManager();
 
 initAuthStrategies();
 

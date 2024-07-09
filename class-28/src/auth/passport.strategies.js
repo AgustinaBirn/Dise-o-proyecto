@@ -4,13 +4,13 @@ import GitHubStrategy from "passport-github2";
 import jwt from "passport-jwt";
 
 import config from "../config.js";
-import {UserManager} from "../dao/user.manager.js";
-import {isValidPassword} from "../utils.js";
+import {UsersManager} from "../controllers/users.manager.js";
+import {isValidPassword} from "../services/utils.js";
 
 const localStrategy = local.Strategy;
 const jwtStrategy = jwt.Strategy;
 const jwtExtractor = jwt.ExtractJwt;
-const manager = new UserManager();
+const manager = new UsersManager();
 
 const cookieExtractor = (req) => {
     let token = null;
