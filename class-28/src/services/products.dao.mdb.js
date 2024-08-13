@@ -16,7 +16,7 @@ export class ProductsService {
       const options = {
         page: page,
         limit: limit,
-        sort: { price: sort }
+        sort: sort
       };
       
       const products = await productsModel.paginate({}, {filter, options, lean: true});

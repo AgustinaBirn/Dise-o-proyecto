@@ -5,6 +5,7 @@ import productsModel from "../models/products.model.js";
 // import { ProductManager } from "../dao/manager.mdb.js";
 import {ProductsManager} from '../controllers/products.manager.js';
 import config from "../config.js";
+import { handlePolicies, verifyToken } from "../../../preentrega-3/src/services/utils.js";
 
 const middlewer = (req, res, next) => {
   console.log("Se procesa middlware");
@@ -66,7 +67,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", uploader.single("thumbnail"), async (req, res) => {
+router.post("/", handlePolicies(["admin", "premium"]), uploader.single("thumbnail"), async (req, res) => {
   try {
     const body = req.body;
     const socketServer = req.app.get("socketServer");
