@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "choco": "^0.2.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
   }
 }
